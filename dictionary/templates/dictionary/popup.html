@@ -1,0 +1,44 @@
+{% load i18n %}
+<div class="popup">
+    <a class="popup__close" href="javacript:void(0);">&times;</a>
+    <div class="popup__content">
+        <h3 class="popup__title">{% trans "مترادف ها" %}</h3>
+        {% for entry in entries %}
+            {% for synonym in entry.synonyms.all %}
+                <a href="{% url 'dictionary:get_word_detail' synonym.word %}"
+                   class="popup__link">{{ synonym.word }}
+                </a>
+                {% if not forloop.last %},&nbsp;{% endif %}
+            {% endfor %}
+            {% if not forloop.last %}<br>{% endif %}
+        {% endfor %}
+    </div>
+    <hr>
+    <div class="popup__content">
+        <h3 class="popup__title">{% trans "متضاد ها" %}</h3>
+        {% for entry in entries %}
+            {% for antonym in entry.antonyms.all %}
+                <a href="{% url 'dictionary:get_word_detail' antonym.word %}"
+                   class="overlay__link">{{ antonym.word }}
+                </a>
+                {% if not forloop.last %},&nbsp;{% endif %}
+            {% endfor %}
+            {% if not forloop.last %}<br>{% endif %}
+        {% empty %}
+        {% endfor %}
+    </div>
+    <hr>
+    <div class="popup__content">
+        <h3 class="popup__title">{% trans "ترجمه ها" %}</h3>
+        {% for entry in entries %}
+            {% for translate in entry.translation.all %}
+                <a href="{% url 'dictionary:get_word_detail' translate.word %}"
+                   class="popup__link">
+                    {{ translate.word }}
+                </a>
+                {% if not forloop.last %}،&nbsp;{% endif %}
+            {% endfor %}
+            {% if not forloop.last %}<br>{% endif %}
+        {% endfor %}
+    </div>
+</div>

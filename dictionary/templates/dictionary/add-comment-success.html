@@ -1,0 +1,21 @@
+{% extends 'dictionary/base.html' %}
+{% load i18n %}
+{% load static %}
+
+{% block title %}
+    {% trans "نظر شما ثبت شد" %}
+{% endblock %}
+{% block main %}
+    <main class="form">
+        <div class="message {% get_current_language as LANGUAGE_CODE %}{% if LANGUAGE_CODE == 'en' %}message--en{% endif %}">
+            <h2 class="message__title">{% trans "نظر شما ثبت شد" %}</h2>
+            <p class="message__body">
+                {% trans "پس از بررسی نظر شما نمایش داده میشود. " %}
+                {% trans "میتوانید از طریق این" %}
+                <a style="text-decoration: underline" href="{% url 'dictionary:get_word_detail' word.word%}">{% trans "لینک" %}</a>
+                {% trans "به صفحه قبل برگردید." %}
+            </p>
+        </div>
+    </main>
+{% endblock %}
+

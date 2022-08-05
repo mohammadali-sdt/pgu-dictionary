@@ -1,0 +1,149 @@
+{% load auth_extras %}
+{% load i18n %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="fa">
+<head>
+    <meta charset="UTF-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <link rel="apple-touch-icon" sizes="180x180" href="{% static 'img/apple-touch-icon.png' %}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{% static 'img/favicon-32x32.png' %}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{% static 'img/favicon-16x16.png' %}">
+    <link rel="manifest" href="{% static 'img/site.webmanifest' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}"/>
+    <title>
+        {% block title %}
+            {% trans "PGU Dictionary" %}
+        {% endblock %}
+    </title>
+</head>
+<body>
+<div class="container">
+    <header class="header">
+        <nav class="nav">
+            <ul class="items">
+                <li class="items__item items__menu">
+                    <a href="javascript:void(0);" class="items__link menu">
+                        <svg class="items__icon menu__icon">
+                            <use href="{% static 'img/sprite.svg' %}#icon-menu"></use>
+                        </svg>
+                    </a>
+                </li>
+                {% block form %} {% endblock %}
+                <li class="items__item items__logo">
+                    <a href="{% url 'dictionary:home' %}" class="items__link items__logo-link">
+                        <img
+                                class="items__logo-img"
+                                src="{% static 'img/logo.png' %}"
+                                alt="logo"
+                        />
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </header>
+    {% get_current_language as LANGUAGE_CODE %}
+    {% get_available_languages as LANGUAGES %}
+    {% get_language_info_list for LANGUAGES as languages %}
+    <div class="overlay-menu">
+        <a href="#" class="overlay-menu__close">&times;</a>
+        <ul class="overlay-menu__items">
+            <li class="overlay-menu__item">
+                <a href="{% url 'dictionary:home' %}" class="overlay-menu__link">{% trans "خانه" %}</a>
+            </li>
+            {% if not request.user.is_authenticated %}
+                <li class="overlay-menu__item">
+                    <a href="{% url 'accounts:login' %}" class="overlay-menu__link">{% trans "ورود" %}</a>
+                </li>
+            {% endif %}
+            {% if request.user.is_authenticated and request.user.is_staff %}
+                <li class="overlay-menu__item">
+                    <a href="{% url 'admin:index' %}" class="overlay-menu__link">{% trans "ورود به پنل" %}</a>
+                </li>
+            {% endif %}
+            {% if perms.dictionary.view_active_suggestions and request.user|has_group:"admin" %}
+                <li class="overlay-menu__item">
+                    <a href="{% url 'dictionary:get_actived_suggests' %}"
+                       class="overlay-menu__link">{% trans "بررسی پیشنهادات" %}</a>
+                </li>
+            {% endif %}
+            {% if perms.auth.can_add_user %}
+                <li class="overlay-menu__item">
+                    <a href="{% url 'accounts:register' %}" class="overlay-menu__link">{% trans "ثبت کاربر جدید" %}</a>
+                </li>
+            {% endif %}
+            <p>{% trans "انتخاب زبان" %}</p>
+            {% get_current_language as LANGUAGE_CODE %}
+            {% get_available_languages as LANGUAGES %}
+            {% get_language_info_list for LANGUAGES as languages %}
+            {% for language in languages %}
+                <li class="overlay-menu__item">
+                    <a href="/{{ language.code }}/{{ request.path|slice:"4:" }}">{{ language.name_local }}</a>
+                </li>
+            {% endfor %}
+            {% if request.user.is_authenticated %}
+                <li class="overlay-menu__item">
+                    <a href="{% url 'accounts:logout' %}" class="overlay-menu__link">{% trans "خروج" %}</a>
+                </li>
+            {% endif %}
+        </ul>
+    </div>
+    {% block overlays %}
+
+    {% endblock %}
+    {% block main %}
+        <main class="main"></main>
+    {% endblock %}
+
+    <footer class="footer">
+        <div class="contact">
+            <h3 class="contact__head">{% trans "تماس با ما" %}</h3>
+            <div class="contact__content">
+                <p class="contact__text">{% trans "شماره تماس : ۰۹۱۲۲۲۲۲۲" %}</p>
+                <p class="contact__text">{% trans "ایمیل : dictionary@gmail.com" %}</p>
+            </div>
+        </div>
+        <div class="contact">
+            <h3 class="contact__head">{% trans "درباره ما" %}</h3>
+            <div class="contact__content">
+                <p class="contact__text"
+                   {% get_current_language as LANGUAGE_CODE %}{% if LANGUAGE_CODE == 'en' %}style="direction: ltr"{% endif %}>
+                    {% trans "لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ" %}
+                </p>
+            </div>
+        </div>
+        <div class="contact">
+            <h3 class="contact__head">{% trans "عضویت در خبرنامه" %}</h3>
+            <div class="contact__content">
+                <p class="contact__text">
+                    {% trans "جهت عضویت در خبرنامه ایمیل خود را وارد کنید" %}
+                </p>
+                <form class="contact__form search-form">
+                    <input
+                            type="text"
+                            class="search-form__input contact__input
+
+                                    {% get_current_language as LANGUAGE_CODE %}{% if LANGUAGE_CODE == 'en' %}contact__input--en{% endif %}"
+                            placeholder={% trans "آدرس ایمیل" %}
+                    />
+                    <button type="submit" class="contact__button search-form__submit">
+                        {% trans "عضویت" %}
+                    </button>
+                </form>
+            </div>
+        </div>
+        <div class="footer__logo">
+            <img
+                    class="footer__logo-img"
+                    src="{% static 'img/logo.png' %}"
+                    alt="logo"
+            />
+        </div>
+    </footer>
+</div>
+<script type="application/javascript" src="{% static 'js/script.js' %}"></script>
+
+{% block js %} {% endblock %}
+</body>
+</html>

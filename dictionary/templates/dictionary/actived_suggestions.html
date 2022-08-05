@@ -1,0 +1,46 @@
+{% extends 'dictionary/base.html' %}
+{% load i18n %}
+{% load static %}
+{% block title %}
+    {% trans "بررسی پیشنهادات" %}
+{% endblock %}
+{% block main %}
+    <main class="main-suggest">
+        <div class="suggest-container">
+            {% for suggest in actived_suggests %}
+                <div class="comment {% get_current_language as LANGUAGE_CODE %}{% if LANGUAGE_CODE == 'en' %}comment--en{% endif %}">
+                    <div class="comment__profile">
+                        <svg class="comment__profile-icon">
+                            <use href="{% static 'img/sprite.svg' %}#icon-user"></use>
+                        </svg>
+                    </div>
+                    <div class="comment__body">
+                        <h4 class="comment__header">
+                            <span>{{ suggest.firstname }} {{ suggest.lastname }}</span>
+                            <span>{% trans "برای واژه" %}</span>
+                            <span>"{{ suggest.word }}"</span>
+                        </h4>
+                        <p class="comment__text">
+                            {{ suggest.text }}
+                        </p>
+                        {% if suggest.url %}
+                            <a target="_blank" href="{{ suggest.url }}"
+                               class="comment__reply-link">{% trans "منبع" %}</a>
+                        {% endif %}
+                        {% if suggest.social_media_id %}
+                            <p>
+                                <span>{% trans "شبکه اجتماعی" %}</span>
+                                :
+                                <span>{{ suggest.social_media_id }}</span>
+                            </p>
+                        {% endif %}
+                    </div>
+                    <div class="comment__actions">
+                        {{ suggest.created_at }}
+                    </div>
+                </div>
+            {% endfor %}
+            {% include 'dictionary/pagination.html' with page=actived_suggests %}
+        </div>
+    </main>
+{% endblock %}

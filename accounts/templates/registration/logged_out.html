@@ -1,0 +1,20 @@
+{% extends 'dictionary/base.html' %}
+{% load static %}
+{% load i18n %}
+{% block title %}
+    {% trans "خارج شدید !" %}
+{% endblock %}
+{% block main %}
+    <main class="form">
+        <div class="message
+                {% get_current_language as LANGUAGE_CODE %}{% if LANGUAGE_CODE == 'en' %}message--en{% endif %}">
+            <h2 class="message__title">{% trans "خارج شدید" %}</h2>
+            <p class="message__body">
+                {% trans "میتوانید از طریق لینک" %}
+                <a style="text-decoration: underline" href="{% url 'accounts:login' %}">{% trans "ورود" %}</a>
+                {% trans "به سایت وارد شوید." %}
+            </p>
+        </div>
+    </main>
+{% endblock %}
+

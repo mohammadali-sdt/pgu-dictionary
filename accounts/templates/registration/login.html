@@ -1,0 +1,48 @@
+{% extends 'dictionary/base.html' %}
+{% load static %}
+{% load i18n %}
+{% block title %}
+    {% trans "ورود به سایت" %}
+{% endblock %}
+{% block main %}
+    <main class="form">
+        <div class="form-container">
+            <form class="login-form {% get_current_language as LANGUAGE_CODE %}{% if LANGUAGE_CODE == 'en' %}login-form--en{% endif %}" method="POST" action="{% url 'accounts:login' %}">
+                <h2 class="login-form__header">{% trans "وارد شوید" %}</h2>
+                {% if form.errors %}
+                    <div class="login-form__divider">
+                        <ul class="errorlist">
+                            {% for field, errors in form.errors.items %}
+                                {% for error in errors %}
+                                    <li>{{ error }}</li>
+                                {% endfor %}
+                            {% endfor %}
+                        </ul>
+                    </div>
+                {% endif %}
+                <div class="login-form__divider">
+                    <input
+                            type="text"
+                            class="login-form__input"
+                            placeholder="{% trans "نام کاربری" %}"
+                            name="username"
+                            id="id_username"
+                    />
+                </div>
+                <div class="login-form__divider">
+                    <input
+                            type="password"
+                            class="login-form__input"
+                            placeholder="{% trans "رمز عبور" %}"
+                            name="password"
+                            id="id_password"
+                    />
+                </div>
+                {% csrf_token %}
+                <input type="hidden" name="next" value="{{ next }}"/>
+                <button class="login-form__btn" type="submit">{% trans "ورود" %}</button>
+            </form>
+        </div>
+    </main>
+{% endblock %}
+

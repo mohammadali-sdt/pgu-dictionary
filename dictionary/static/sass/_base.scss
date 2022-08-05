@@ -1,0 +1,118 @@
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: inherit;
+  list-style: none;
+}
+
+:root {
+  box-sizing: border-box;
+  font-size: 62.5%; // 1rem = 10px
+}
+
+body {
+  width: 100%;
+  font-family: "Iransans";
+  font-weight: 200;
+  font-size: 1.6rem;
+  line-height: 1.8;
+  direction: rtl;
+  text-align: right;
+  color: $text-color;
+  background-image: linear-gradient(
+    to right bottom,
+    rgba($secondary-bg-color-1, 0.7),
+    rgba($secondary-bg-color-3, 1)
+  );
+  background-repeat: no-repeat;
+  // overflow: hidden;
+}
+
+a {
+  text-decoration: none;
+  color: $text-color;
+  transition: color 0.3s ease;
+  font-weight: 400;
+  &:hover {
+    color: $thrtiary-bg-color;
+  }
+}
+
+hr {
+  // margin-top: 0.5rem;
+  color: $text-color;
+}
+
+.ml-sm {
+  margin-left: 1rem;
+}
+
+.ml-md {
+  margin-left: 2rem;
+}
+
+.ml-l {
+  margin-left: 3rem;
+}
+
+.pad-x-sm {
+  padding: 0 1rem;
+}
+
+.pad-x-md {
+  padding: 0 2rem;
+}
+
+.pad-x-l {
+  padding: 0 3rem;
+}
+
+img {
+  width: 100%;
+  // height: 100%;
+}
+
+input,
+textarea,
+select {
+  text-align: right;
+  direction: rtl;
+  color: $secondary-bg-color-2;
+  font-family: "Iransans";
+  outline: 0;
+  border: none;
+  border-radius: 0.3rem;
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: $secondary-bg-color-2;
+}
+input:focus,
+textarea:focus {
+  border: none;
+  outline: 0;
+}
+
+textarea {
+  resize: none;
+}
+
+button {
+  font-family: "Iransans";
+  text-align: center;
+  border: none;
+  outline: 0;
+  padding: 0.5rem 1.2rem;
+  color: $text-color;
+  background-color: $secondary-bg-color-2;
+  cursor: pointer;
+  border-radius: 0.5rem;
+  @include box-shadow();
+  transition: all 0.3s ease-in-out;
+  &:hover {
+    background-color: $primary-bg-color;
+  }
+}

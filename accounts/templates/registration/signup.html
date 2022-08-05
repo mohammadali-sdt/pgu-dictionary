@@ -1,0 +1,45 @@
+{% extends 'dictionary/base.html' %}
+{% load static %}
+{% load i18n %}
+{% block title %}
+    {% trans "ثبت کاربر جدید" %}
+{% endblock %}
+{% block main %}
+    <main class="form">
+    <div class="form-container">
+        <form class="signup-form {% get_current_language as LANGUAGE_CODE %}{% if LANGUAGE_CODE == 'en' %}signup-form--en{% endif %}" method="POST" action="{% url 'accounts:register' %}">
+            <h2 class="signup-form__header">{% trans "ثبت کاربر جدید" %}</h2>
+            <div class="signup-form__divider">
+                {{ form.first_name.errors }}
+                {{ form.first_name }}
+            </div>
+            <div class="signup-form__divider">
+                {{ form.last_name.errors }}
+                {{ form.last_name }}
+            </div>
+            <div class="signup-form__divider">
+                {{ form.username.errors }}
+                {{ form.username }}
+            </div>
+            <div class="signup-form__divider">
+                {{ form.email.errors }}
+                {{ form.email }}
+            </div>
+            <div class="signup-form__divider">
+                {{ form.password.errors }}
+                {{ form.password }}
+            </div>
+            <div class="signup-form__divider">
+                {{ form.password2.errors }}
+                {{ form.password2 }}
+            </div>
+            <div class="signup-form__divider">
+                {{ form.group.errors }}
+                {{ form.group }}
+            </div>
+            {% csrf_token %}
+            <button class="signup-form__btn" type="submit">{% trans "ثبت کاربر" %}</button>
+        </form>
+    </div>
+    </main>
+{% endblock %}

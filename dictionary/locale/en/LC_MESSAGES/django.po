@@ -1,0 +1,510 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# 
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-08-05 15:54+0430\n"
+"PO-Revision-Date: 2022-08-05 15:03+0000\n"
+"Last-Translator: b'  <mohammadali@gmail.com>'\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Translated-Using: django-rosetta 0.9.3\n"
+
+#: .\dictionary\forms.py:18
+msgid "Your firstname"
+msgstr ""
+
+#: .\dictionary\forms.py:20
+msgid "Your lastname"
+msgstr ""
+
+#: .\dictionary\forms.py:22
+msgid "Your email"
+msgstr ""
+
+#: .\dictionary\forms.py:24
+msgid "Your comment"
+msgstr ""
+
+#: .\dictionary\models.py:11
+msgid "English"
+msgstr ""
+
+#: .\dictionary\models.py:12
+msgid "Farsi"
+msgstr ""
+
+#: .\dictionary\models.py:15 .\dictionary\models.py:91
+#: .\dictionary\models.py:140 .\dictionary\models.py:163
+msgid "word"
+msgstr ""
+
+#: .\dictionary\models.py:22
+msgid "language"
+msgstr ""
+
+#: .\dictionary\models.py:33
+msgid "Word"
+msgstr ""
+
+#: .\dictionary\models.py:34
+msgid "Words"
+msgstr ""
+
+#: .\dictionary\models.py:80
+msgid "Verb"
+msgstr ""
+
+#: .\dictionary\models.py:81
+msgid "Noun"
+msgstr ""
+
+#: .\dictionary\models.py:82
+msgid "Adjective"
+msgstr ""
+
+#: .\dictionary\models.py:83
+msgid "Pronoun"
+msgstr ""
+
+#: .\dictionary\models.py:84
+msgid "Adverb"
+msgstr ""
+
+#: .\dictionary\models.py:85
+msgid "Preposition"
+msgstr ""
+
+#: .\dictionary\models.py:86
+msgid "Conjunction"
+msgstr ""
+
+#: .\dictionary\models.py:87
+msgid "Interjection"
+msgstr ""
+
+#: .\dictionary\models.py:89 .\dictionary\models.py:208
+msgid "type"
+msgstr ""
+
+#: .\dictionary\models.py:93
+msgid "translation"
+msgstr ""
+
+#: .\dictionary\models.py:95
+msgid "synonyms"
+msgstr ""
+
+#: .\dictionary\models.py:97
+msgid "antonyms"
+msgstr ""
+
+#: .\dictionary\models.py:104
+msgid "Entry"
+msgstr ""
+
+#: .\dictionary\models.py:105
+msgid "Entries"
+msgstr ""
+
+#: .\dictionary\models.py:110 .\dictionary\models.py:120
+#: .\dictionary\models.py:131
+msgid "entry"
+msgstr ""
+
+#: .\dictionary\models.py:111 .\dictionary\models.py:146
+#: .\dictionary\models.py:167
+msgid "text"
+msgstr ""
+
+#: .\dictionary\models.py:114
+msgid "Example"
+msgstr ""
+
+#: .\dictionary\models.py:115
+msgid "Examples"
+msgstr ""
+
+#: .\dictionary\models.py:121
+msgid "file"
+msgstr ""
+
+#: .\dictionary\models.py:125
+msgid "Image"
+msgstr ""
+
+#: .\dictionary\models.py:126
+msgid "Images"
+msgstr ""
+
+#: .\dictionary\models.py:132 .\dictionary\models.py:144
+msgid "url"
+msgstr ""
+
+#: .\dictionary\models.py:135
+msgid "URL"
+msgstr ""
+
+#: .\dictionary\models.py:136
+msgid "URLs"
+msgstr ""
+
+#: .\dictionary\models.py:141 .\dictionary\models.py:164
+msgid "firstname"
+msgstr ""
+
+#: .\dictionary\models.py:142 .\dictionary\models.py:165
+msgid "lastname"
+msgstr ""
+
+#: .\dictionary\models.py:143 .\dictionary\models.py:166
+msgid "email"
+msgstr ""
+
+#: .\dictionary\models.py:145
+msgid "social_media_id"
+msgstr ""
+
+#: .\dictionary\models.py:147 .\dictionary\models.py:171
+msgid "created_at"
+msgstr ""
+
+#: .\dictionary\models.py:148 .\dictionary\models.py:173
+msgid "active"
+msgstr ""
+
+#: .\dictionary\models.py:154
+msgid "Suggest"
+msgstr ""
+
+#: .\dictionary\models.py:155
+msgid "Suggests"
+msgstr ""
+
+#: .\dictionary\models.py:157
+msgid "Can view acived suggestions"
+msgstr ""
+
+#: .\dictionary\models.py:170
+msgid "reply_to"
+msgstr ""
+
+#: .\dictionary\models.py:172
+msgid "updated_at"
+msgstr ""
+
+#: .\dictionary\models.py:187
+msgid "Comment"
+msgstr ""
+
+#: .\dictionary\models.py:188
+msgid "Comments"
+msgstr ""
+
+#: .\dictionary\models.py:201
+msgid "Like"
+msgstr ""
+
+#: .\dictionary\models.py:202
+msgid "Dislike"
+msgstr ""
+
+#: .\dictionary\models.py:207
+msgid "user_ip"
+msgstr ""
+
+#: .\dictionary\models.py:210
+msgid "comment"
+msgstr ""
+
+#: .\dictionary\models.py:216
+msgid "Comments Feedback"
+msgstr ""
+
+#: .\dictionary\models.py:217
+msgid "Comments Feedbacks"
+msgstr ""
+
+#: .\dictionary\templates\dictionary\actived_suggestions.html:5
+#: .\dictionary\templates\dictionary\base.html:63
+msgid "بررسی پیشنهادات"
+msgstr "Review Suggests"
+
+#: .\dictionary\templates\dictionary\actived_suggestions.html:20
+msgid "برای واژه"
+msgstr "for word"
+
+#: .\dictionary\templates\dictionary\actived_suggestions.html:28
+msgid "منبع"
+msgstr "Source"
+
+#: .\dictionary\templates\dictionary\actived_suggestions.html:32
+msgid "شبکه اجتماعی"
+msgstr "Social Media"
+
+#: .\dictionary\templates\dictionary\add-comment-success.html:6
+#: .\dictionary\templates\dictionary\add-comment-success.html:11
+msgid "نظر شما ثبت شد"
+msgstr "Your Comment is Submitted"
+
+#: .\dictionary\templates\dictionary\add-comment-success.html:13
+msgid "پس از بررسی نظر شما نمایش داده میشود. "
+msgstr "After checking your comment, it will be displayed."
+
+#: .\dictionary\templates\dictionary\add-comment-success.html:14
+msgid "میتوانید از طریق این"
+msgstr "You can with this"
+
+#: .\dictionary\templates\dictionary\add-comment-success.html:15
+msgid "لینک"
+msgstr "link"
+
+#: .\dictionary\templates\dictionary\add-comment-success.html:16
+msgid "به صفحه قبل برگردید."
+msgstr "Go back to the previous page."
+
+#: .\dictionary\templates\dictionary\add-suggestion-success.html:6
+msgid "پیشنهاد ارسال شد"
+msgstr "Suggest Sent"
+
+#: .\dictionary\templates\dictionary\add-suggestion-success.html:11
+msgid "پیشنهاد شما ارسال شد"
+msgstr "Your Suggestion has been sent"
+
+#: .\dictionary\templates\dictionary\add-suggestion-success.html:13
+msgid "میتوانید از طریق لینک"
+msgstr "You can with this"
+
+#: .\dictionary\templates\dictionary\add-suggestion-success.html:14
+msgid "جستجو"
+msgstr "Search"
+
+#: .\dictionary\templates\dictionary\add-suggestion-success.html:15
+msgid "جستجو کنید."
+msgstr "Search."
+
+#: .\dictionary\templates\dictionary\base.html:13
+msgid "PGU Dictionary"
+msgstr ""
+
+#: .\dictionary\templates\dictionary\base.html:49
+msgid "خانه"
+msgstr "Home"
+
+#: .\dictionary\templates\dictionary\base.html:53
+msgid "ورود"
+msgstr "Login"
+
+#: .\dictionary\templates\dictionary\base.html:58
+msgid "ورود به پنل"
+msgstr "Admin Panel"
+
+#: .\dictionary\templates\dictionary\base.html:68
+msgid "ثبت کاربر جدید"
+msgstr "Add New User"
+
+#: .\dictionary\templates\dictionary\base.html:71
+msgid "انتخاب زبان"
+msgstr "Language"
+
+#: .\dictionary\templates\dictionary\base.html:82
+msgid "خروج"
+msgstr "Logout"
+
+#: .\dictionary\templates\dictionary\base.html:96
+msgid "تماس با ما"
+msgstr "Contact Us"
+
+#: .\dictionary\templates\dictionary\base.html:98
+msgid "شماره تماس : ۰۹۱۲۲۲۲۲۲"
+msgstr "Phone : 091222222"
+
+#: .\dictionary\templates\dictionary\base.html:99
+msgid "ایمیل : dictionary@gmail.com"
+msgstr "Email : dictionary@gmail.com"
+
+#: .\dictionary\templates\dictionary\base.html:103
+msgid "درباره ما"
+msgstr "About Us"
+
+#: .\dictionary\templates\dictionary\base.html:107
+msgid "لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ"
+msgstr "Lorem Ipsum is simple text that use in ui design it's dummy text."
+
+#: .\dictionary\templates\dictionary\base.html:112
+msgid "عضویت در خبرنامه"
+msgstr "Register in Newsletter"
+
+#: .\dictionary\templates\dictionary\base.html:115
+msgid "جهت عضویت در خبرنامه ایمیل خود را وارد کنید"
+msgstr "Add your Email for Newsletter"
+
+#: .\dictionary\templates\dictionary\base.html:122
+msgid "آدرس ایمیل"
+msgstr "Email Address"
+
+#: .\dictionary\templates\dictionary\base.html:125
+msgid "عضویت"
+msgstr "register"
+
+#: .\dictionary\templates\dictionary\home.html:14
+#: .\dictionary\templates\dictionary\word_not_found.html:15
+msgid "جستجو واژه مورد نظر"
+msgstr "Search Word"
+
+#: .\dictionary\templates\dictionary\not_found_page.html:5
+#: .\dictionary\templates\dictionary\not_found_page.html:11
+msgid "صفحه مورد نظر پیدا نشد"
+msgstr "Page Not Found"
+
+#: .\dictionary\templates\dictionary\popup.html:5
+#: .\dictionary\templates\dictionary\result-english-word.html:40
+#: .\dictionary\templates\dictionary\result-english-word.html:155
+msgid "مترادف ها"
+msgstr "Synonyms"
+
+#: .\dictionary\templates\dictionary\popup.html:12
+#: .\dictionary\templates\dictionary\popup.html:26
+#: .\dictionary\templates\dictionary\popup.html:41
+msgid "یافت نشد"
+msgstr "Not Found"
+
+#: .\dictionary\templates\dictionary\popup.html:18
+#: .\dictionary\templates\dictionary\result-english-word.html:54
+#: .\dictionary\templates\dictionary\result-english-word.html:165
+msgid "متضاد ها"
+msgstr "Antonyms"
+
+#: .\dictionary\templates\dictionary\popup.html:32
+#: .\dictionary\templates\dictionary\result-english-word.html:73
+#: .\dictionary\templates\dictionary\result-english-word.html:140
+#: .\dictionary\templates\dictionary\result-english-word.html:175
+msgid "ترجمه ها"
+msgstr "Translations"
+
+#: .\dictionary\templates\dictionary\result-english-word.html:6
+msgid "جستجو واژه"
+msgstr "Search Word"
+
+#: .\dictionary\templates\dictionary\result-english-word.html:16
+#: .\dictionary\templates\dictionary\result-farsi-word.html:15
+msgid "جستجو کلمه مورد نظر"
+msgstr "Search Word"
+
+#: .\dictionary\templates\dictionary\result-english-word.html:36
+#: .\dictionary\templates\dictionary\result-english-word.html:139
+msgid "اصطلاحنامه"
+msgstr "Thesaurus"
+
+#: .\dictionary\templates\dictionary\result-english-word.html:95
+#: .\dictionary\templates\dictionary\result-english-word.html:141
+#: .\dictionary\templates\dictionary\word_not_found.html:40
+msgid "ارسال پیشنهاد"
+msgstr "Submit a Suggest"
+
+#: .\dictionary\templates\dictionary\result-english-word.html:101
+#: .\dictionary\templates\dictionary\word_not_found.html:43
+msgid "واژه"
+msgstr "Word"
+
+#: .\dictionary\templates\dictionary\result-english-word.html:105
+#: .\dictionary\templates\dictionary\word_not_found.html:47
+msgid "نام شما"
+msgstr "Your Firstname"
+
+#: .\dictionary\templates\dictionary\result-english-word.html:109
+#: .\dictionary\templates\dictionary\word_not_found.html:51
+msgid "نام خانوادگی شما"
+msgstr "Your Lastname"
+
+#: .\dictionary\templates\dictionary\result-english-word.html:113
+#: .\dictionary\templates\dictionary\word_not_found.html:55
+msgid "ایمیل شما"
+msgstr "Your Email"
+
+#: .\dictionary\templates\dictionary\result-english-word.html:117
+#: .\dictionary\templates\dictionary\word_not_found.html:59
+msgid "لینک سایت یا منبع"
+msgstr "Site link or resource"
+
+#: .\dictionary\templates\dictionary\result-english-word.html:121
+#: .\dictionary\templates\dictionary\word_not_found.html:63
+msgid "ایدی یا شناسه شبکه اجتماعی"
+msgstr "ID of your social network"
+
+#: .\dictionary\templates\dictionary\result-english-word.html:125
+msgid "نظر خود را بنویسید"
+msgstr "Write your comment"
+
+#: .\dictionary\templates\dictionary\result-english-word.html:128
+#: .\dictionary\templates\dictionary\word_not_found.html:70
+msgid "ارسال"
+msgstr "Submit"
+
+#: .\dictionary\templates\dictionary\result-english-word.html:185
+msgid "مثال ها"
+msgstr "Examples"
+
+#: .\dictionary\templates\dictionary\result-english-word.html:205
+#: .\dictionary\templates\dictionary\result-english-word.html:228
+msgid "اضافه کردن نظر"
+msgstr "Add Comment"
+
+#: .\dictionary\templates\dictionary\result-english-word.html:249
+msgid "پاسخ دادن"
+msgstr "reply"
+
+#: .\dictionary\templates\dictionary\result-english-word.html:255
+#: .\dictionary\templates\dictionary\result-english-word.html:280
+msgid "ارسال پاسخ"
+msgstr "Submit Reply"
+
+#: .\dictionary\templates\dictionary\result-english-word.html:316
+msgid "در پاسخ به "
+msgstr "In response to"
+
+#: .\dictionary\templates\dictionary\result-farsi-word.html:5
+#: .\dictionary\templates\dictionary\result-farsi-word.html:33
+msgid "نتیجه جستجو برای واژه"
+msgstr "Search result for the word"
+
+#: .\dictionary\templates\dictionary\suggest_word-partial.html:9
+msgid "واژه پیدا نشد"
+msgstr "Word not found"
+
+#: .\dictionary\templates\dictionary\word_not_found.html:5
+msgid "واژه مورد نظر پیدا نشد"
+msgstr "Word Not Found"
+
+#: .\dictionary\templates\dictionary\word_not_found.html:33
+msgid "واژه مورد نظر پیدا نشد !"
+msgstr "Word Not Found !"
+
+#: .\dictionary\templates\dictionary\word_not_found.html:35
+msgid "میتوانید از طریق فرم زیر پیشنهاد خود را ارسال کنید."
+msgstr "You can send your suggest through the form below."
+
+#: .\dictionary\templates\dictionary\word_not_found.html:67
+msgid "پیشنهاد خود را بنویسید"
+msgstr "Write your suggestion"
+
+#~ msgid "اضافه کردن واژه"
+#~ msgstr "Add Word"
+
+#~ msgid "اپلیکیشن موبایل"
+#~ msgstr "Mobile App"
+
+#~ msgid "اپ اندروید"
+#~ msgstr "Android App"
+
+#~ msgid "اپ IOS"
+#~ msgstr "IOS App"

@@ -1,0 +1,14 @@
+{% extends 'dictionary/base.html' %}
+{% load i18n %}
+{% load static %}
+{% block title %}
+    404 {% trans "صفحه مورد نظر پیدا نشد" %}
+{% endblock %}
+
+{% block main %}
+    <main style="min-height: 100vh">
+       <div class="message {% get_current_language as LANGUAGE_CODE %}{% if LANGUAGE_CODE == 'en' %}message--en{% endif %}">
+           <h2 class="message__title">{% trans "صفحه مورد نظر پیدا نشد" %}</h2>
+       </div>
+    </main>
+{% endblock %}

@@ -1,0 +1,1112 @@
+// HEADER STYLE
+.header {
+  padding: 1rem 0.2rem;
+  background-color: $primary-bg-color;
+  @include box-shadow();
+}
+
+// END HEADER STYLE
+
+// SEARCH-FORM STYLE
+.search-form {
+  display: flex;
+  justify-content: center;
+
+  &__divder {
+    position: relative;
+  }
+
+  &__input {
+    // text-align: right;
+    text-align: center;
+    direction: rtl;
+    font-size: 1.7rem;
+    display: block;
+    width: 100%;
+    padding: 1.2rem;
+    border-top-right-radius: 0.3rem;
+    border-bottom-right-radius: 0.3rem;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    // @include box-shadow();
+    box-shadow: none;
+
+    &--en {
+      direction: ltr;
+      // text-align: left;
+    }
+
+    @include respond(tab-land) {
+      width: 65rem;
+    }
+  }
+
+  &__input--suggest {
+    border-bottom-right-radius: 0;
+  }
+
+  &__input--english {
+    text-align: center;
+  }
+
+  &__submit {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: "Iransans";
+    font-size: 1.6rem;
+    background-color: $secondary-bg-color-2;
+    border: none;
+    cursor: pointer;
+    padding: 0 3rem;
+    color: white;
+    border-top-left-radius: 0.5rem;
+    border-bottom-left-radius: 0.5rem;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+    transition: color 0.3s ease;
+    @include box-shadow();
+    @include respond(tab-land) {
+      width: 12rem;
+    }
+
+    &:hover {
+      color: $thrtiary-bg-color;
+    }
+  }
+
+  &__icon {
+    fill: $text-color;
+    width: 3.5rem;
+    height: 3.5rem;
+    transition: fill 0.3s ease;
+  }
+
+  &__submit:hover &__icon {
+    fill: $thrtiary-bg-color;
+  }
+}
+
+// END SEARCH FORM STYLE
+
+// SUGGEST STYLE
+
+.suggest {
+  width: 100%;
+  max-height: 20rem;
+  overflow-y: scroll;
+  color: $secondary-bg-color-1;
+  position: absolute;
+  display: none;
+  gap: 1.5rem;
+  flex-direction: column;
+  align-items: center;
+  border-bottom-right-radius: 0.3rem;
+  top: 95%;
+  right: 0;
+  font-weight: bold;
+  background-color: #fff;
+  padding-top: 1rem;
+  transition: height 0.2s ease;
+  z-index: 9999;
+
+  @include respond(tab-land) {
+    width: 65rem;
+  }
+
+  &__show {
+    display: flex;
+  }
+
+  &__item {
+    width: 100%;
+    text-align: center;
+    cursor: pointer;
+  }
+
+  &__item:not(:last-child) {
+    border-bottom: 1px solid $thrtiary-bg-color;
+  }
+
+  &__link {
+    display: block;
+    width: 100%;
+    color: $secondary-bg-color-2;
+  }
+}
+
+// END SUGGEST STYLE
+
+// RESULT STYLE
+
+// .result {
+//   padding: 1rem;
+//   font-size: 2rem;
+//   font-weight: bold;
+//   display: flex;
+//   flex-wrap: wrap;
+//   justify-content: center;
+//   &--english {
+//     flex-direction: row-reverse;
+//     // background-color: red;
+//     // justify-content: flex-end;
+//     text-align: left;
+//   }
+//   &--persian {
+//     // background-color: blue;
+//     text-align: right;
+//   }
+// }
+
+// END RESULT STYLE
+
+// STYLE WORD TRANSLATE
+
+.word-translate {
+  width: 100%;
+  padding: 0.5rem 1rem;
+  text-align: right;
+  font-size: 2.5rem;
+  font-weight: bold;
+  border-bottom: 1px solid #c2c2c2;
+}
+
+// END STYLE WORD TRANSLATE
+
+// ITEMS STYLE
+.items {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 2rem;
+  color: $text-color;
+  list-style: none;
+
+  &__item {
+    margin-right: 1rem;
+  }
+
+  &__link {
+    display: none;
+    text-decoration: none;
+  }
+
+  &__icon {
+    fill: $text-color;
+    width: 3.8rem;
+    height: 3.8rem;
+    transition: fill 0.3s ease;
+  }
+
+  &__icon:hover {
+    fill: $thrtiary-bg-color;
+  }
+
+  &__logo {
+    display: none;
+    margin-right: auto;
+    margin-left: 2rem;
+    @include respond(desktop) {
+      display: block;
+    }
+  }
+
+  &__logo-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  &__logo-img {
+    width: 4rem;
+    height: 4rem;
+  }
+
+  &__form-item {
+    margin: 0 auto;
+  }
+
+  &__form {
+  }
+
+  &__input {
+    padding: 0.5rem 1rem;
+  }
+
+  &__button {
+    padding: 0;
+    width: 7rem;
+  }
+
+  &__form-icon {
+    width: 2.5rem;
+    height: 2.5rem;
+  }
+}
+
+// END ITEMS STYLE
+
+// OVERLAY-MENU STYLE
+.overlay-menu {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  right: -100%;
+  bottom: 0;
+  text-align: center;
+  font-size: 2rem;
+  font-weight: bold;
+  background-color: rgba($color: $overlay-bg-color, $alpha: 0.99);
+  z-index: 100000;
+  transition: all 0.5s ease-in-out;
+  @include respond(tab-land) {
+    width: 20%;
+  }
+
+  &__show {
+    // display: flex;
+    right: 0;
+  }
+
+  &__close {
+    margin-right: 1.5rem;
+    font-size: 5rem;
+    align-self: flex-start;
+    justify-content: flex-start;
+  }
+
+  &__items {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2rem;
+  }
+
+  &__item {
+    width: 80%;
+    border-bottom: 1px solid transparent;
+    transition: border 0.3s ease;
+
+    &:hover {
+      border-bottom: 1px solid #aaa;
+    }
+  }
+
+  &__link {
+  }
+}
+
+// END OVERLAY-MENU STYLE
+
+// STYLE MAIN
+
+.main {
+  //   height: 80vh!;
+}
+
+// END STYLE MAIN
+
+// STYLE MENU
+
+.menu {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+// END STYLE MENU
+
+// FOOTER STYLE
+.footer {
+  background-color: $primary-bg-color;
+  text-align: center;
+  padding: 1.5rem 0;
+
+  &__logo {
+    align-self: center;
+    margin-right: auto;
+    margin-left: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  &__logo-img {
+  }
+}
+
+// END FOOTER STYLE
+
+// CONTACS STYLE
+
+.contact {
+  width: 25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+
+  &__text {
+  }
+
+  &__head {
+    font-size: 2rem;
+  }
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  &__form {
+    width: 90%;
+    margin-top: 1rem;
+  }
+
+  &__input {
+    font-size: 1.4rem;
+    padding: 0.2rem 1rem;
+    text-align: right;
+    direction: rtl;
+
+    &--en {
+      direction: ltr;
+      text-align: left;
+    }
+  }
+
+  &__button {
+    font-size: 1.4rem;
+    width: 10%;
+  }
+}
+
+// END CONTACS STYLE
+
+// word-result STYLE
+
+.word-result {
+  font-size: 2.5rem;
+  font-weight: 500;
+  text-align: center;
+  margin-bottom: 1rem;
+  &--en {
+    direction: ltr;
+    text-align: left;
+  }
+  &--fa {
+    font-size: 2rem;
+  }
+  @include respond(tab-land) {
+    text-align: left;
+    margin-right: 2rem;
+    margin-left: 2rem;
+  }
+}
+
+// END word-result STYLE
+
+// RESULT STYLE
+
+.result {
+  width: 100%;
+  padding: 0 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+
+  &__title {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 2.2rem;
+    font-weight: 500;
+  }
+
+  &__body {
+    text-align: center;
+  }
+
+  &__header {
+    text-decoration: underline;
+    // color: $primary-bg-color;
+  }
+
+  &__content {
+    margin-top: 0.5rem;
+  }
+
+  &__content-link,
+  &__content-example {
+    color: $primary-bg-color;
+
+    &--popup {
+      position: relative;
+    }
+  }
+
+  &__content-example {
+    font-weight: 400;
+    // text-align: justify;
+    margin-top: 1.5rem;
+    margin-bottom: 2rem;
+  }
+
+  &__images {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
+    justify-content: center;
+    justify-items: center;
+    gap: 2rem;
+    overflow: hidden;
+    @include respond(tab-land) {
+      grid-template-columns: repeat(auto-fill, minmax(20rem, 1fr));
+    }
+  }
+
+  &__image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  &__body {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
+
+  @include respond(tab-land) {
+    align-items: flex-start;
+    width: 80%;
+
+    &__body {
+      text-align: left;
+    }
+
+    &__item {
+    }
+  }
+}
+
+// END RESULT STYLE
+
+// BADGE STYLE
+.badge {
+  font-size: 1.2rem;
+  font-weight: 400;
+  color: $thrtiary-bg-color;
+  background-color: $primary-bg-color;
+  padding: 0 1.5rem;
+  border-radius: 3rem;
+}
+
+// END BADGE STYLE
+
+// WRAP-UP STYLE
+
+.wrap-up {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  text-align: center;
+  background-color: $primary-bg-color;
+  padding: 1rem 0;
+  margin-top: -1rem;
+
+  &__link {
+    text-decoration: underline;
+  }
+
+  @include respond(tab-land) {
+    margin-top: 0;
+    position: absolute;
+    top: 0;
+    left: 80%;
+    width: 20rem;
+  }
+}
+
+// END WRAP-UP STYLE
+
+// COMMENT FORM STYLE
+.comment-form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+
+  &--en {
+    input, textarea {
+      direction: ltr;
+      text-align: left;
+    }
+  }
+
+  &__header {
+    color: $primary-bg-color;
+    font-weight: 400;
+    text-decoration: underline;
+    @include respond(tab-land) {
+      font-size: 2.8rem;
+    }
+  }
+
+  &__divider {
+    width: 95%;
+    @include respond(tab) {
+      width: 70%;
+    }
+    @include respond(tab-land) {
+      width: 50%;
+    }
+  }
+
+  &__btn {
+  }
+
+  &__input,
+  &__textarea {
+    width: 100%;
+    padding: 0.3rem 1.2rem;
+    @include box-shadow();
+    border-radius: 0.3rem;
+    @include respond(tab) {
+      padding: 0.5rem 1.2rem;
+    }
+    @include respond(tab-land) {
+      padding: 0.8rem 1.2rem;
+    }
+  }
+
+  &__textarea {
+    font-size: 1.5rem;
+  }
+}
+
+// END COMMENT FORM STYLE
+
+// COMMENT BOX STYLE
+
+.comment {
+  &--en {
+    direction: ltr;
+    text-align: left;
+
+    .comment__profile {
+      @include respond(desktop) {
+        margin-right: 0;
+        margin-left: 2rem;
+      }
+    }
+
+    .comment__actions {
+      @include respond(desktop){
+        margin-left: 0;
+        margin-right: 5rem;
+      }
+    }
+  }
+
+  direction: rtl;
+  display: flex;
+  flex-basis: 100%;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+  color: $primary-bg-color;
+  background-color: $thrtiary-bg-color;
+
+  @include respond(desktop) {
+    flex-direction: row;
+    flex-wrap: wrap;
+    padding: 2rem 0;
+  }
+
+  &__replies {
+    // flex-basis: 100%;
+    // flex-grow: 1;
+    width: 100%;
+  }
+
+  &--reply {
+    &--en {
+      direction: ltr;
+      text-align: left;
+    }
+    @include respond(desktop) {
+      &--en {
+        direction: ltr;
+        text-align: left;
+        margin-right: 0;
+        margin-left: 7rem;
+
+      }
+      margin-right: 7rem;
+
+    }
+  }
+
+
+  &__profile {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 8rem;
+    height: 8rem;
+    margin-top: 1rem;
+    border-radius: 100%;
+    background-color: $primary-bg-color;
+    @include box-shadow();
+    @include respond(desktop) {
+      margin-right: 2rem;
+    }
+  }
+
+  &__profile-icon {
+    fill: $thrtiary-bg-color;
+    width: 5rem;
+    height: 5rem;
+  }
+
+  &__header {
+  }
+
+  &__body {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    text-align: center;
+    gap: 1rem;
+    @include respond(desktop) {
+      margin-right: 1rem;
+      text-align: right;
+      align-items: flex-start;
+      flex-grow: 1;
+      gap: 0;
+    }
+  }
+
+  &__text {
+    font-weight: 400;
+    padding: 0 1rem;
+    @include respond(desktop) {
+      padding: 0;
+    }
+  }
+
+  &__reply-link {
+    width: fit-content;
+    text-decoration: underline;
+    color: $overlay-bg-color;
+
+    &:hover {
+      color: $secondary-bg-color-2;
+    }
+  }
+
+  &__reply-close {
+    font-size: 4rem;
+    font-weight: 400;
+    align-self: flex-start;
+    margin-right: 2rem;
+  }
+
+  &__reply-form {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 9999;
+    background-color: $form-container-bg;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+
+    .comment__reply-close{
+      margin-left: 2rem;
+    }
+
+    &--show {
+      opacity: 1;
+      visibility: visible;
+
+      form {
+        justify-self: center;
+
+        h2 {
+          color: $text-color;
+        }
+
+      }
+
+
+    }
+  }
+
+  &__actions {
+    display: flex;
+    align-items: center;
+    gap: 5rem;
+    margin-bottom: 1rem;
+    @include respond(desktop) {
+      align-self: flex-end;
+      margin-left: 5rem;
+    }
+  }
+
+  &__action {
+    display: flex;
+    align-items: normal;
+    gap: 0.5rem;
+    color: $overlay-bg-color;
+
+    &:hover {
+      color: $secondary-bg-color-2;
+    }
+
+    &:hover .comment__icon {
+      fill: $secondary-bg-color-2;
+    }
+
+    &--like {
+    }
+
+    &--dislike {
+      align-items: center;
+    }
+  }
+
+  &__icon {
+    fill: $overlay-bg-color;
+    width: 2.1rem;
+    height: 2.1rem;
+    transition: fill 0.3s ease;
+
+    &--like {
+    }
+
+    &--dislike {
+      transform: rotate(180deg);
+    }
+  }
+}
+
+// END COMMENT BOX STYLE
+
+// OVERLAY STYLE
+
+.overlay {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  background-color: rgba($color: $primary-bg-color, $alpha: 0.8);
+  overflow-y: scroll;
+  transform: scale(0.2);
+  transition: all 0.2s ease;
+  @include respond(tab-land) {
+    width: 50rem;
+    height: 58rem;
+    background-color: $primary-bg-color;
+  }
+
+  &__head {
+    display: flex;
+    align-items: center;
+  }
+
+  &__close {
+    margin-right: 1.5rem;
+    font-size: 5rem;
+  }
+
+  &__header {
+    flex-grow: 1;
+    margin-left: 3.5rem;
+    text-align: center;
+  }
+
+  &__content {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
+
+  &__result {
+  }
+
+  &__title {
+    font-size: 2.2rem;
+  }
+
+  &__items {
+    margin-top: 1rem;
+  }
+
+  &__item {
+    margin-top: 1rem;
+  }
+
+  &__link {
+  }
+}
+
+.overlay-container--show {
+  .overlay {
+    transform: scale(1);
+  }
+}
+
+// END OVERLAY STYLE
+
+.suggestion-form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 1rem;
+
+  &--en {
+    input, textarea {
+      direction: ltr;
+      text-align: left;
+    }
+  }
+
+  &__divider {
+    width: 100%;
+  }
+
+  &__input,
+  &__textarea {
+    width: 80%;
+    padding: 0.5rem 1.2rem;
+  }
+
+  &__textarea {
+  }
+
+  &__btn {
+    width: fit-content;
+
+    &:hover {
+      background-color: $secondary-bg-color-3;
+      color: $primary-bg-color;
+    }
+  }
+}
+
+// FOUNDED-ITEMS STYLE
+.founded-items {
+  text-align: center;
+  // display: flex;
+  // flex-direction: column;
+  // align-items: center;
+  &__item {
+    border-radius: 1.5rem;
+    background-color: $secondary-bg-color-2;
+    margin-top: 1rem;
+    padding: 1rem 0;
+    width: 100%;
+
+    &:nth-child(2n) {
+      background-color: $primary-bg-color;
+    }
+
+    // @include respond(desktop) {
+    //   width: 80%;
+    // }
+  }
+
+  &__link {
+    display: block;
+    width: 100%;
+  }
+}
+
+// END FOUNDED-ITEMS STYLE
+
+// PAGINATION STYLE
+
+.pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 2rem;
+  direction: ltr;
+  gap: 1.2rem;
+
+  &__page-num {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 3rem;
+    height: 3rem;
+    border-radius: 100%;
+    background-color: $primary-bg-color;
+    padding: 0.5rem;
+  }
+}
+
+// END PAGINATION STYLE
+
+// LOGIN-FORM AND SIGNUP-FORM STYLE
+.login-form,
+.signup-form {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+  text-align: center;
+
+  &--en {
+    input, select, option {
+      direction: ltr;
+      text-align: left;
+    }
+    .errorlist{
+      direction: ltr;
+    }
+
+  }
+
+  @include respond(tab-land) {
+    width: 100%;
+    height: 100%;
+    border-radius: 0.3rem;
+  }
+
+  &__header {
+    @include respond(tab-land) {
+      margin-top: 1rem;
+    }
+  }
+
+  &__divider {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  &__input,
+  &__select {
+    padding: 0.5rem 1.2rem;
+    width: 80%;
+    @include box-shadow();
+    @include respond(tab) {
+      width: 50%;
+    }
+  }
+
+  &__option {
+    font-family: "Iransans";
+  }
+
+  &__btn {
+  }
+}
+
+// END LOGIN-FORM AND SIGNUP-FORM STYLE
+
+// LOGOUT STYLE
+
+.logout {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+// END LOGOUT STYLE
+
+// ERRORLIST STYLE
+.errorlist {
+  width: 50%;
+  font-size: 1.2rem;
+  font-weight: 500;
+  color: $error-color;
+}
+
+// END ERRORLIST SYLE
+
+//  MESSAGE STYLE
+.message {
+  text-align: center;
+
+  &--en {
+    direction: ltr;
+  }
+
+  &--not-found {
+  }
+
+  &__title {
+  }
+
+  &__body {
+    margin-top: 1rem;
+    font-weight: 400;
+  }
+
+}
+
+// END MESSAGE STYLE
+
+// POPUP STYLE
+
+.popup {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 23rem;
+  max-height: 20rem;
+  overflow-y: scroll;
+  border-radius: 0.3rem;
+  background-color: $form-container-bg;
+  z-index: 999999;
+  text-align: center;
+  @include box-shadow();
+  @include respond(tab) {
+    width: 30rem;
+  }
+
+
+  &__content {
+  }
+
+  &__title {
+  }
+
+  &__link {
+  }
+
+  &__close {
+    display: block;
+    text-align: right;
+    font-size: 3rem;
+    margin-right: 2rem;
+  }
+}
+
+// END POPUP STYLE

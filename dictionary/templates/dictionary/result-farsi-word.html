@@ -1,0 +1,47 @@
+{% extends 'dictionary/base.html' %}
+{% load static %}
+{% load i18n %}
+{% block title %}
+    {% trans "نتیجه جستجو برای واژه" %} "{{ word }}"
+{% endblock %}
+{% block form %}
+    <li class="items__item items__form-item">
+        <form action="" id="form-search" class="items__form search-form">
+            <div class="search-form__divder">
+                <input
+                        id="word"
+                        type="text"
+                        class="items__input search-form__input"
+                        placeholder="{% trans "جستجو کلمه مورد نظر" %}"
+                        value="{{ word }}"
+                        autocomplete="off"
+                />
+                <ul class="suggest"></ul>
+            </div>
+
+            <button id="searchBtn" type="submit" class="items__button search-form__submit">
+                <svg class="search-form__icon items__form-icon">
+                    <use href="{% static 'img/sprite.svg' %}#icon-search"></use>
+                </svg>
+            </button>
+        </form>
+    </li>
+{% endblock %}
+{% block main %}
+    <main class="result-fa-word">
+        <h1 class="word-result word-result--fa {% get_current_language as LANGUAGE_CODE %}{% if LANGUAGE_CODE == 'en' %}word-result--en{% endif %}">
+            {% trans "نتیجه جستجو برای واژه" %} "{{ word }}"
+        </h1>
+        <hr/>
+        <section class="section-result-fa">
+            <ul class="founded-items">
+                {% for word in words %}
+                    <li class="founded-items__item">
+                        <a class="founded-items__link" href="{% url 'dictionary:get_word_detail' word%}">{{ word|capfirst }}</a>
+                    </li>
+                {% endfor %}
+            </ul>
+            {% include 'dictionary/pagination.html' with page=words %}
+        </section>
+    </main>
+{% endblock %}

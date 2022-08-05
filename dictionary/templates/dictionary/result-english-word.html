@@ -1,0 +1,470 @@
+{% extends 'dictionary/base.html' %}
+{% load i18n %}
+{% load static %}
+{% load thumbnail %}
+{% block title %}
+    {% trans "جستجو واژه" %} {{ word.word }}
+{% endblock %}
+{% block form %}
+    <li class="items__item items__form-item">
+        <form action="" id="form-search" class="items__form search-form">
+            <div class="search-form__divder">
+                <input
+                        id="word"
+                        type="text"
+                        class="items__input search-form__input search-form__input--en"
+                        placeholder="{% trans "جستجو کلمه مورد نظر" %}"
+                        value="{{ word.word }}"
+                        autocomplete="off"
+                />
+                <ul class="suggest"></ul>
+            </div>
+
+            <button id="searchBtn" type="submit" class="items__button search-form__submit">
+                <svg class="search-form__icon items__form-icon">
+                    <use href="{% static 'img/sprite.svg' %}#icon-search"></use>
+                </svg>
+            </button>
+        </form>
+    </li>
+{% endblock %}
+{% block overlays %}
+    <div id="thesaurus" class="overlay-container">
+        <div class="overlay">
+            <div class="overlay__head">
+                <a href="javascript:void(0);" class="overlay__close">&times;</a>
+                <h2 class="overlay__header">{% trans "اصطلاحنامه" %}</h2>
+            </div>
+            <div class="overlay__content">
+                <article class="overlay__result">
+                    <h3 class="overlay__title">{% trans "مترادف ها" %}</h3>
+                    <ul class="overlay__items">
+                        {% for entry in entries %}
+                            {% for synonym in entry.synonyms.all %}
+                                <li class="overlay__item">
+                                    <a href="{% url 'dictionary:get_word_detail' synonym.word %}"
+                                       class="overlay__link">{{ synonym.word }}</a>
+                                </li>
+                            {% endfor %}
+                        {% endfor %}
+                    </ul>
+                </article>
+                <hr>
+                <article class="overlay__result">
+                    <h3 class="overlay__title">{% trans "متضاد ها" %}</h3>
+                    <ul class="overlay__items">
+                        {% for entry in entries %}
+                            {% for antonym in entry.antonyms.all %}
+                                <li class="overlay__item">
+                                    <a href="{% url 'dictionary:get_word_detail' antonym.word %}"
+                                       class="overlay__link">{{ antonym.word }}</a>
+                                </li>
+                            {% endfor %}
+                        {% endfor %}
+                    </ul>
+                </article>
+            </div>
+        </div>
+    </div>
+    <div id="translations" class="overlay-container">
+        <div class="overlay">
+            <div class="overlay__head">
+                <a href="javascript:void(0);" class="overlay__close">&times;</a>
+                <h2 class="overlay__header">{% trans "ترجمه ها" %}</h2>
+            </div>
+            <div class="overlay__content">
+                <article class="overlay__result">
+                    <ul class="overlay__items">
+                        {% for entry in entries %}
+                            {% for translate in entry.translation.all %}
+                                <li class="overlay__item">
+                                    <a href="{% url 'dictionary:get_word_detail' translate.word %}"
+                                       class="overlay__link">{{ translate.word }}</a>
+                                </li>
+                            {% endfor %}
+                        {% endfor %}
+                    </ul>
+                </article>
+            </div>
+        </div>
+    </div>
+    <div id="suggestion" class="overlay-container">
+        <div class="overlay">
+            <div class="overlay__head">
+                <a href="javascript:void(0);" class="overlay__close">&times;</a>
+                <h2 class="overlay__header">{% trans "ارسال پیشنهاد" %}</h2>
+            </div>
+            <form class="suggestion-form overlay__form
+                    {% get_current_language as LANGUAGE_CODE %}{% if LANGUAGE_CODE == 'en' %}suggestion-form--en{% endif %}"
+                  id="form-suggestion" method="POST"
+                  action="{% url 'dictionary:add_new_suggestion' %}">
+                <div class="suggestion-form__divider">
+                    <input required hidden name="word" class="suggestion-form__input overlay__input" type="text"
+                           placeholder="{% trans "واژه" %}" value="{{ word }}">
+                </div>
+                <div class="suggestion-form__divider">
+                    <input required name="firstname" class="suggestion-form__input overlay__input" type="text"
+                           placeholder="{% trans "نام شما" %}">
+                </div>
+                <div class="suggestion-form__divider">
+                    <input class="suggestion-form__input overlay__input" name="lastname" type="text"
+                           placeholder="{% trans "نام خانوادگی شما" %}">
+                </div>
+                <div class="suggestion-form__divider">
+                    <input class="suggestion-form__input overlay__input" name="email" type="email"
+                           placeholder="{% trans "ایمیل شما" %}">
+                </div>
+                <div class="suggestion-form__divider">
+                    <input class="suggestion-form__input overlay__input" name="url" type="url"
+                           placeholder="{% trans "لینک سایت یا منبع" %}">
+                </div>
+                <div class="suggestion-form__divider">
+                    <input class="suggestion-form__input overlay__input" name="social_media_id" type="url"
+                           placeholder="{% trans "ایدی یا شناسه شبکه اجتماعی" %}">
+                </div>
+                <div class="suggestion-form__divider">
+                <textarea required class="suggestion-form__textarea overlay__textarea" name="text" cols="10" rows="5"
+                          placeholder="{% trans "پیشنهاد خود را بنویسید" %}"></textarea>
+                </div>
+                {% csrf_token %}
+                <button class="suggestion-form__btn overlay__btn" type="submit">{% trans "ارسال" %}</button>
+            </form>
+        </div>
+    </div>
+{% endblock %}
+{% block main %}
+    <main class="result-en-word">
+        <h1 class="word-result">{{ word.word|capfirst }}</h1>
+        <hr/>
+        <section class="word-detail">
+            <div class="wrap-up">
+                <a class="wrap-up__link" data-id="thesaurus" href="#">{% trans "اصطلاحنامه" %}</a>
+                <a class="wrap-up__link" data-id="translations" href="#">{% trans "ترجمه ها" %}</a>
+                <a class="wrap-up__link" data-id="suggestion" href="#">{% trans "ارسال پیشنهاد" %}</a>
+            </div>
+            {% for entry in entries %}
+                <article class="result">
+                    <h2 class="result__title">{{ entry.word }} <span class="badge">{{ entry.type }}</span></h2>
+                    <ul class="result__images">
+                        {% for image in entry.images.all %}
+                            <li class="result__item-img">
+                                <img class="result__image" src="{% thumbnail image.file 280x0 %}" alt="{{ word }}"/>
+                            </li>
+                        {% endfor %}
+                        {% for im in entry.urls.all %}
+                            <li class="result__item-img">
+                                <img class="result__image" src="{{ im.url }}" alt="{{ word }}"/>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                    <ul class="result__body">
+                        <li class="result__item">
+                            <h3 class="result__header">{% trans "مترادف ها" %}</h3>
+                            <div class="result__content">
+                                {% for synonym in entry.synonyms.all %}
+                                    <a href="{% url 'dictionary:get_word_detail' synonym.word %}"
+                                       class="result__content-link">
+                                        {{ synonym.word }}{% if not forloop.last %}, {% endif %}</a>
+                                {% endfor %}
+                            </div>
+                        </li>
+                        <li class="result__item">
+                            <h3 class="result__header">{% trans "متضاد ها" %}</h3>
+                            <div class="result__content">
+                                {% for antonym in entry.antonyms.all %}
+                                    <a href="{% url 'dictionary:get_word_detail' antonym.word %}"
+                                       class="result__content-link">
+                                        {{ antonym.word }}{% if not forloop.last %}, {% endif %}</a>
+                                {% endfor %}
+                            </div>
+                        </li>
+                        <li class="result__item">
+                            <h3 class="result__header">{% trans "ترجمه ها" %}</h3>
+                            <div class="result__content">
+                                {% for translate in entry.translation.all %}
+                                    <a href="{% url 'dictionary:get_word_detail' translate.word %}"
+                                       class="result__content-link">
+                                        {{ translate.word }}{% if not forloop.last %}، {% endif %}</a>
+                                {% endfor %}
+                            </div>
+                        </li>
+                        <li class="result__item">
+                            <h3 class="result__header">{% trans "مثال ها" %}</h3>
+                            <div class="result__content result__content--example">
+                                {% for example in entry.examples.all %}
+                                    <p class="result__content-example">
+                                        {{ example.text }}
+                                    </p>
+                                {% endfor %}
+                            </div>
+                        </li>
+                    </ul>
+                </article>
+                {% if not forloop.last %}
+                    <hr>{% endif %}
+            {% endfor %}
+        </section>
+
+        <hr/>
+
+        <section class="comment-form-section">
+            <form action="{% url 'dictionary:add_new_comment' word.id %}" method="POST" class="comment-form
+                    {% get_current_language as LANGUAGE_CODE %}{% if LANGUAGE_CODE == 'en' %}comment-form--en{% endif %}">
+                <h2 class="comment-form__header">{% trans "اضافه کردن نظر" %}</h2>
+                <div class="comment-form__divider">
+                    {{ comment_form.firstname.errors }}
+                    {{ comment_form.firstname }}
+                    {#                    <input class="comment-form__input" type="text" placeholder="{% trans "نام شما" %}" name="firstname" required>#}
+                </div>
+                <div class="comment-form__divider">
+                    {{ comment_form.lastname.errors }}
+                    {{ comment_form.lastname }}
+                    {#                    <input class="comment-form__input" type="text" placeholder="{% trans "نام خانوادگی شما" %}" name="lastname">#}
+                </div>
+                <div class="comment-form__divider">
+                    {{ comment_form.email.errors }}
+                    {{ comment_form.email }}
+                    {#                    <input class="comment-form__input" type="email" placeholder="{% trans "ایمیل شما" %}" name="email">#}
+                </div>
+                <div class="comment-form__divider">
+                    {{ comment_form.text.errors }}
+                    {{ comment_form.text }}
+                    {#                    <textarea name="text" required class="comment-form__textarea" cols="10" rows="5"#}
+                    {#                              placeholder="{% trans "نظر خود را بنویسید" %}"></textarea>#}
+                </div>
+                {% csrf_token %}
+                <button class="comment-form__btn" type="submit">{% trans "اضافه کردن نظر" %}</button>
+            </form>
+        </section>
+
+        <section class="comments-from">
+            <div class="comments">
+                {% for comment in comments %}
+                    <div class="comment
+                            {% get_current_language as LANGUAGE_CODE %}{% if LANGUAGE_CODE == 'en' %}comment--en{% endif %}">
+                        <div class="comment__profile">
+                            <svg class="comment__profile-icon">
+                                <use href="{% static 'img/sprite.svg' %}#icon-user"></use>
+                            </svg>
+                        </div>
+                        <div class="comment__body">
+                            <h4 class="comment__header">
+                                {{ comment.firstname }} {{ comment.lastname }}
+                            </h4>
+                            <p class="comment__text">
+                                {{ comment.text }}
+                            </p>
+                            <a href="javascript:void(0);" data-cid="{{ comment.id }}"
+                               class="comment__reply-link">{% trans "پاسخ دادن" %}</a>
+                            <div id="comment-{{ comment.id }}" class="comment__reply-form">
+                                <a class="comment__reply-close" href="javascript:void(0);">&times;</a>
+                                <form action="{% url 'dictionary:add_new_reply' word.id comment.id %}" method="POST"
+                                      class="comment-form
+                                              {% get_current_language as LANGUAGE_CODE %}{% if LANGUAGE_CODE == 'en' %}comment-form--en{% endif %}">
+                                    <h2 class="comment-form__header">
+                                        {% trans "ارسال پاسخ" %}
+                                    </h2>
+                                    <div class="comment-form__divider">
+                                        {{ comment_form.firstname.errors }}
+                                        {{ comment_form.firstname }}
+                                        {#                    <input class="comment-form__input" type="text" placeholder="{% trans "نام شما" %}" name="firstname" required>#}
+                                    </div>
+                                    <div class="comment-form__divider">
+                                        {{ comment_form.lastname.errors }}
+                                        {{ comment_form.lastname }}
+                                        {#                    <input class="comment-form__input" type="text" placeholder="{% trans "نام خانوادگی شما" %}" name="lastname">#}
+                                    </div>
+                                    <div class="comment-form__divider">
+                                        {{ comment_form.email.errors }}
+                                        {{ comment_form.email }}
+                                        {#                    <input class="comment-form__input" type="email" placeholder="{% trans "ایمیل شما" %}" name="email">#}
+                                    </div>
+                                    <div class="comment-form__divider">
+                                        {{ comment_form.text.errors }}
+                                        {{ comment_form.text }}
+                                        {#                    <textarea name="text" required class="comment-form__textarea" cols="10" rows="5"#}
+                                        {#                              placeholder="{% trans "نظر خود را بنویسید" %}"></textarea>#}
+                                    </div>
+                                    {% csrf_token %}
+                                    <button class="comment-form__btn"
+                                            type="submit">{% trans "ارسال پاسخ" %}</button>
+                                </form>
+                            </div>
+                        </div>
+                        <div class="comment__actions">
+                            <a data-action="dislike"
+                               data-comment="{{ comment.id }}" href="javascript:void(0);"
+                               class="comment__action comment__action--dislike">
+                                <span class="comment__rate-num">
+                                    {{ comment.get_total_dislikes }}
+                                </span>
+                                <svg class="comment__icon comment__icon--dislike">
+                                    <use href="{% static 'img/sprite.svg' %}#icon-like"></use>
+                                </svg>
+                            </a>
+                            <a data-action="like"
+                               data-comment="{{ comment.id }}" href="javascript:void(0);"
+                               class="comment__action comment__action--like">
+                                <svg class="comment__icon comment__icon--like">
+                                    <use href="{% static 'img/sprite.svg' %}#icon-like"></use>
+                                </svg>
+                                <span class="comment__rate-num">{{ comment.get_total_likes }}</span>
+                            </a>
+                        </div>
+                        <div class="comment__replies">
+                            {% for c in comment.replies.all %}
+                                {% if c.active %}
+                                    <div class="comment comment--reply
+                                            {% get_current_language as LANGUAGE_CODE %}{% if LANGUAGE_CODE == 'en' %}comment--reply--en{% endif %}">
+                                        <div class="comment__profile">
+                                            <svg class="comment__profile-icon">
+                                                <use href="{% static 'img/sprite.svg' %}#icon-user"></use>
+                                            </svg>
+                                        </div>
+                                        <div class="comment__body">
+                                            <h4 class="comment__header">
+                                                {{ c.firstname }} {{ c.lastname }}
+                                                {% trans "در پاسخ به " %}
+                                                {{ comment.firstname }} {{ comment.lastname }}
+                                            </h4>
+                                            <p class="comment__text">
+                                                {{ c.text }}
+                                            </p>
+                                        </div>
+                                        <div class="comment__actions">
+                                            <a data-action="dislike" data-comment="{{ c.id }}"
+                                               href="javascript:void(0);"
+                                               class="comment__action comment__action--dislike">
+                                                <span class="comment__rate-num">{{ c.get_total_dislikes }}</span>
+                                                <svg class="comment__icon comment__icon--dislike">
+                                                    <use href="{% static 'img/sprite.svg' %}#icon-like"></use>
+                                                </svg>
+                                            </a>
+                                            <a data-action="like" data-comment="{{ c.id }}" href="javascript:void(0);"
+                                               class="comment__action comment__action--like">
+                                                <svg class="comment__icon comment__icon--like">
+                                                    <use href="{% static 'img/sprite.svg' %}#icon-like"></use>
+                                                </svg>
+                                                <span class="comment__rate-num">{{ c.get_total_likes }}</span>
+                                            </a>
+                                        </div>
+                                    </div>
+                                {% endif %}
+
+                            {% endfor %}
+                        </div>
+                    </div>
+                    {% if not forloop.last %}
+                        <hr>
+                    {% endif %}
+                {% endfor %}
+            </div>
+        </section>
+    </main>
+{% endblock %}
+{% block js %}
+    <script src="https://cdn.jsdelivr.net/npm/js-cookie@2.2.1/src/
+js.cookie.min.js" crossorigin="anonymous" defer type="application/javascript"></script>
+
+    <script type="application/javascript">
+        const overlayContainer = document.querySelector(".overlay-container");
+        const closeOverlay = document.querySelector(".overlay__close");
+        const overlayOpenLinksContainer = document.querySelector(".wrap-up");
+        // Overlays
+        overlayOpenLinksContainer.addEventListener("click", function (e) {
+            if (
+                e.target.classList.contains("wrap-up__link") &&
+                e.target.closest(".wrap-up")
+            ) {
+                const overlayContainer = document.getElementById(e.target.dataset.id);
+                overlayContainer.classList.add("overlay-container--show");
+                overlayContainer.addEventListener("click", function (e) {
+                    if (
+                        (e.target.classList.contains("overlay__close") &&
+                            e.target.closest(".overlay__head")) ||
+                        e.target === this
+                    ) {
+                        this.classList.remove("overlay-container--show");
+                    }
+                });
+            }
+        });
+        // Comment Reply and Comment Like and Dislike
+        const commentContainer = document.querySelector('.comments');
+        commentContainer.addEventListener('click', async function (e) {
+            if (e.target.classList.contains('comment__reply-link')
+                && e.target.closest('.comment__body')
+                && e.target.dataset.cid) {
+                const commentId = e.target.dataset.cid;
+                const replyForm = document.getElementById(`comment-${commentId}`);
+                if (replyForm) {
+                    replyForm.classList.add('comment__reply-form--show');
+                    replyForm.addEventListener('click', function (e) {
+                        console.log('clicked');
+                        if (e.target.classList.contains('comment__reply-close') && e.target.closest('.comment__reply-form--show')) {
+                            replyForm.classList.remove('comment__reply-form--show');
+                        }
+                    })
+                }
+            }
+
+            if (e.target.closest('.comment__actions') && e.target.closest('.comment__action')) {
+                const linkEl = e.target.closest('.comment__action')
+                const {action, comment} = linkEl.dataset;
+                const body = {action, comment};
+                const res = await fetch('{% url 'dictionary:add_feedback_comment' %}', {
+                    method: 'POST',
+                    headers: {
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json',
+                        'X-CSRFToken': Cookies.get('csrftoken'),
+                    },
+                    mode: "same-origin",
+                    body: JSON.stringify(body),
+                })
+                const data = await res.json();
+                if (data.status === 'success') {
+                    const {likes, dislikes} = data;
+                    if (action === 'like') {
+                        linkEl.querySelector('span').textContent = likes;
+                        linkEl.parentNode.querySelector('.comment__action--dislike').querySelector('span').textContent = dislikes;
+                    } else if (action === 'dislike') {
+                        linkEl.querySelector('span').textContent = dislikes;
+                        linkEl.parentNode.querySelector('.comment__action--like').querySelector('span').textContent = likes;
+                    }
+                }
+            }
+
+        })
+
+        const wordDetailContainer = document.querySelector('.word-detail');
+
+        wordDetailContainer.addEventListener('click', async function (e) {
+            if (e.target.classList.contains('result__content-example')
+                && e.target.closest('.result__content--example')) {
+                document.querySelectorAll('.popup').forEach(popupEl => popupEl.remove());
+                e.target.classList.add('result__content-example--popup');
+                const value = document.getSelection().toString().replace('.', '').trim().toLowerCase();
+                if (value) {
+                    const res = await fetch(`${location.origin}/${location.pathname.slice(1, 3)}/popup/${value}`);
+                    const data = await res.json();
+                    if (data.status === 'success') {
+                        const text = e.target.textContent;
+                        e.target.insertAdjacentHTML('afterbegin', data.data);
+                        e.target.addEventListener('click', function (e) {
+                            if (e.target.classList.contains('popup__close') && e.target.closest('.popup')) {
+                                this.innerHTML = '';
+                                this.textContent = text;
+                                this.classList.remove('result__content-example--popup');
+                            }
+                        })
+                    }
+
+                }
+            }
+
+
+        })
+
+    </script>
+{% endblock %}

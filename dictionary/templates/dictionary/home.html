@@ -1,0 +1,25 @@
+{% extends 'dictionary/base.html' %} {% load static %}
+{% load i18n %}
+{% block main %}
+    <main class="main">
+        <form id="form-search" class="search-form">
+            <div class="search-form__divder">
+                <input
+                        required
+                        autocomplete="off"
+                        type="text"
+                        id="word"
+                        name="word"
+                        class="search-form__input {% get_current_language as LANGUAGE_CODE %}{% if LANGUAGE_CODE == 'en' %}search-form__input--en{% endif %}"
+                        placeholder="{% trans 'جستجو واژه مورد نظر' %}"
+                />
+                <ul class="suggest"></ul>
+            </div>
+            <button id="searchBtn" type="submit" class="search-form__submit">
+                <svg class="search-form__icon">
+                    <use href="{% static 'img/sprite.svg' %}#icon-search"></use>
+                </svg>
+            </button>
+        </form>
+    </main>
+{% endblock %}

@@ -1,0 +1,20 @@
+{% extends 'dictionary/base.html' %}
+{% load i18n %}
+{% load static %}
+
+{% block title %}
+    {% trans "کاربر با موفقیت ساخته شد" %}
+{% endblock %}
+{% block main %}
+    <main class="form">
+        <div class="message {% get_current_language as LANGUAGE_CODE %}{% if LANGUAGE_CODE == 'en' %}message--en{% endif %}">
+            <h2 class="message__title">{% trans "کاربر با موفقیت ساخته شد" %}</h2>
+            <p class="message__body">
+                {% trans "میتوانید از طریق این" %}
+                <a style="text-decoration: underline" href="{% url 'accounts:register' %}">{% trans 'لینک' %}</a>
+                {% trans "کاربر جدیدی اضافه کنید." %}
+            </p>
+        </div>
+    </main>
+{% endblock %}
+

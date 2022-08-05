@@ -1,0 +1,74 @@
+{% extends 'dictionary/base.html' %}
+{% load i18n %}
+{% load static %}
+{% block title %}
+    404 {% trans "واژه مورد نظر پیدا نشد" %}
+{% endblock %}
+{% block form %}
+    <li class="items__item items__form-item">
+        <form action="" id="form-search" class="items__form search-form">
+            <div class="search-form__divder">
+                <input
+                        id="word"
+                        type="text"
+                        class="items__input search-form__input"
+                        placeholder="{% trans "جستجو واژه مورد نظر" %}"
+                        autocomplete="off"
+                />
+                <ul class="suggest"></ul>
+            </div>
+
+            <button id="searchBtn" type="submit" class="items__button search-form__submit">
+                <svg class="search-form__icon items__form-icon">
+                    <use href="{% static 'img/sprite.svg' %}#icon-search"></use>
+                </svg>
+            </button>
+        </form>
+    </li>
+{% endblock %}
+{% block main %}
+    <main class="form">
+        <div class="message {% get_current_language as LANGUAGE_CODE %}{% if LANGUAGE_CODE == 'en' %}message--en{% endif %}">
+            <h2 class="message__title message--not-found">
+                {% trans "واژه مورد نظر پیدا نشد !" %}
+            </h2>
+            <p class="message message__body">{% trans "میتوانید از طریق فرم زیر پیشنهاد خود را ارسال کنید." %}</p>
+        </div>
+        <div class="form-container">
+            <form class="suggestion-form {% get_current_language as LANGUAGE_CODE %}{% if LANGUAGE_CODE == 'en' %}suggestion-form--en{% endif %}" id="form-suggestion" method="POST"
+                  action="{% url 'dictionary:add_new_suggestion' %}">
+                <h2>{% trans "ارسال پیشنهاد" %}</h2>
+                <div class="suggestion-form__divider">
+                    <input required name="word" class="suggestion-form__input" type="text"
+                           placeholder="{% trans "واژه" %}" value="{{ word }}">
+                </div>
+                <div class="suggestion-form__divider">
+                    <input required name="firstname" class="suggestion-form__input" type="text"
+                           placeholder="{% trans "نام شما" %}">
+                </div>
+                <div class="suggestion-form__divider">
+                    <input class="suggestion-form__input" name="lastname" type="text"
+                           placeholder="{% trans "نام خانوادگی شما" %}">
+                </div>
+                <div class="suggestion-form__divider">
+                    <input class="suggestion-form__input" name="email" type="email"
+                           placeholder="{% trans "ایمیل شما" %}">
+                </div>
+                <div class="suggestion-form__divider">
+                    <input class="suggestion-form__input" name="url" type="url"
+                           placeholder="{% trans "لینک سایت یا منبع" %}">
+                </div>
+                <div class="suggestion-form__divider">
+                    <input class="suggestion-form__input" name="social_media_id" type="url"
+                           placeholder="{% trans "ایدی یا شناسه شبکه اجتماعی" %}">
+                </div>
+                <div class="suggestion-form__divider">
+                <textarea required class="suggestion-form__textarea" name="text" cols="10" rows="5"
+                          placeholder="{% trans "پیشنهاد خود را بنویسید" %}"></textarea>
+                </div>
+                {% csrf_token %}
+                <button class="suggestion-form__btn" type="submit">{% trans "ارسال" %}</button>
+            </form>
+        </div>
+    </main>
+{% endblock %}

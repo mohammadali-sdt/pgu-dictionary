@@ -1,0 +1,35 @@
+@mixin box-shadow($x: 0, $y: 0.5, $blur: 0.6) {
+  box-shadow: #{$x}rem #{$y}rem #{$blur}rem rgba($color: #000000, $alpha: 0.2);
+}
+
+@mixin respond($breakpoint) {
+  @if $breakpoint == tab {
+    // 600px
+    @media only screen and (min-width: 37.5em) {
+      @content;
+    }
+  }
+  @if $breakpoint == tab-land {
+    // 900px
+    @media only screen and (min-width: 56.25em) {
+      @content;
+    }
+  }
+  @if $breakpoint == desktop {
+    //1200px
+    @media only screen and (min-width: 75em) {
+      @content;
+    }
+  }
+  @if $breakpoint == big-desktop {
+    //1800px
+    @media only screen and (min-width: 112.5em) {
+      @content;
+    }
+  }
+}
+.btn{
+  &:link, &:hover{
+
+  }
+}

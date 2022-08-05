@@ -1,0 +1,20 @@
+{% extends 'dictionary/base.html' %}
+{% load i18n %}
+{% load static %}
+
+{% block title %}
+    {% trans "پیشنهاد ارسال شد" %}
+{% endblock %}
+{% block main %}
+    <main class="form">
+        <div class="message {% get_current_language as LANGUAGE_CODE %}{% if LANGUAGE_CODE == 'en' %}message--en{% endif %}">
+            <h2 class="message__title">{% trans "پیشنهاد شما ارسال شد" %}</h2>
+            <p class="message__body">
+                {% trans "میتوانید از طریق لینک" %}
+                <a style="text-decoration: underline" href="{% url 'dictionary:home' %}">{% trans "جستجو" %}</a>
+                {% trans "جستجو کنید." %}
+            </p>
+        </div>
+    </main>
+{% endblock %}
+

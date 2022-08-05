@@ -1,0 +1,11 @@
+{% load i18n %}
+{% for suggestion in suggestions %}
+    <li class="suggest__item">
+        <a class="suggest__link"
+           href="{% url 'dictionary:get_word_detail' suggestion.word %}">{{ suggestion.word|capfirst }}</a>
+    </li>
+{% empty %}
+    <li class="suggest__item">
+        {% trans "واژه پیدا نشد" %}
+    </li>
+{% endfor %}
