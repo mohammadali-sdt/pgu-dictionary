@@ -95,6 +95,11 @@
                 <h2 class="overlay__header">{% trans "ارسال پیشنهاد" %}</h2>
             </div>
             <form class="suggestion-form overlay__form
+
+
+
+
+
                     {% get_current_language as LANGUAGE_CODE %}{% if LANGUAGE_CODE == 'en' %}suggestion-form--en{% endif %}"
                   id="form-suggestion" method="POST"
                   action="{% url 'dictionary:add_new_suggestion' %}">
@@ -209,6 +214,11 @@
 
         <section class="comment-form-section">
             <form action="{% url 'dictionary:add_new_comment' word.id %}" method="POST" class="comment-form
+
+
+
+
+
                     {% get_current_language as LANGUAGE_CODE %}{% if LANGUAGE_CODE == 'en' %}comment-form--en{% endif %}">
                 <h2 class="comment-form__header">{% trans "اضافه کردن نظر" %}</h2>
                 <div class="comment-form__divider">
@@ -241,6 +251,11 @@
             <div class="comments">
                 {% for comment in comments %}
                     <div class="comment
+
+
+
+
+
                             {% get_current_language as LANGUAGE_CODE %}{% if LANGUAGE_CODE == 'en' %}comment--en{% endif %}">
                         <div class="comment__profile">
                             <svg class="comment__profile-icon">
@@ -260,6 +275,11 @@
                                 <a class="comment__reply-close" href="javascript:void(0);">&times;</a>
                                 <form action="{% url 'dictionary:add_new_reply' word.id comment.id %}" method="POST"
                                       class="comment-form
+
+
+
+
+
                                               {% get_current_language as LANGUAGE_CODE %}{% if LANGUAGE_CODE == 'en' %}comment-form--en{% endif %}">
                                     <h2 class="comment-form__header">
                                         {% trans "ارسال پاسخ" %}
@@ -315,6 +335,11 @@
                             {% for c in comment.replies.all %}
                                 {% if c.active %}
                                     <div class="comment comment--reply
+
+
+
+
+
                                             {% get_current_language as LANGUAGE_CODE %}{% if LANGUAGE_CODE == 'en' %}comment--reply--en{% endif %}">
                                         <div class="comment__profile">
                                             <svg class="comment__profile-icon">
@@ -437,34 +462,60 @@ js.cookie.min.js" crossorigin="anonymous" defer type="application/javascript"></
 
         })
 
-        const wordDetailContainer = document.querySelector('.word-detail');
+        // const popupRequest = async function (e) {
+        //             if (e.target.classList.contains('result__content-example')
+        //                 && e.target.closest('.result__content--example')) {
+        //                 document.querySelectorAll('.popup').forEach(popupEl => popupEl.remove());
+        //                 e.target.classList.add('result__content-example--popup');
+        //                 const value = document.getSelection().toString().replace('.', '').trim().toLowerCase();
+        //                 if (value) {
+        //                     const res = await fetch(`${location.origin}/${location.pathname.slice(1, 3)}/popup/${value}`);
+        //                     const data = await res.json();
+        //                     if (data.status === 'success') {
+        //                         const text = e.target.textContent;
+        //                         e.target.insertAdjacentHTML('afterbegin', data.data);
+        //                         e.target.addEventListener('click', function (e) {
+        //                             if (e.target.classList.contains('popup__close') && e.target.closest('.popup')) {
+        //                                 this.innerHTML = '';
+        //                                 this.textContent = text;
+        //                                 this.classList.remove('result__content-example--popup');
+        //                             }
+        //                         })
+        //                     }
+        //
+        //                 }
+        //             }
+        //
+        //
+        //         };
+        //wordDetailContainer.addEventListener('click', popupRequest);
+        // const wordDetailContainer = document.querySelector('.word-detail');
 
-        wordDetailContainer.addEventListener('click', async function (e) {
-            if (e.target.classList.contains('result__content-example')
-                && e.target.closest('.result__content--example')) {
-                document.querySelectorAll('.popup').forEach(popupEl => popupEl.remove());
-                e.target.classList.add('result__content-example--popup');
-                const value = document.getSelection().toString().replace('.', '').trim().toLowerCase();
-                if (value) {
-                    const res = await fetch(`${location.origin}/${location.pathname.slice(1, 3)}/popup/${value}`);
-                    const data = await res.json();
-                    if (data.status === 'success') {
-                        const text = e.target.textContent;
-                        e.target.insertAdjacentHTML('afterbegin', data.data);
-                        e.target.addEventListener('click', function (e) {
-                            if (e.target.classList.contains('popup__close') && e.target.closest('.popup')) {
-                                this.innerHTML = '';
-                                this.textContent = text;
-                                this.classList.remove('result__content-example--popup');
-                            }
-                        })
-                    }
-
+        document.addEventListener('selectionchange', async function (e) {
+            const selectionObj = window.getSelection();
+            const parenetEl = selectionObj.focusNode.parentElement;
+            if (parenetEl.classList.contains('result__content-example')
+                && parenetEl.closest('.result__content--example')) {
+                document.querySelectorAll('div.popup').forEach(popupEl => popupEl.remove());
+                parenetEl.classList.add('result__content-example--popup');
+                const value = selectionObj.toString().trim().toLowerCase();
+                const text = parenetEl.textContent;
+                if (!value) {
+                    return;
+                }
+                const res = await fetch(`${location.origin}/${location.pathname.slice(1, 3)}/popup/${value}`);
+                const data = await res.json();
+                if (data.status === 'success') {
+                    parenetEl.insertAdjacentHTML('afterbegin', data.data);
+                    parenetEl.addEventListener('click', function (e) {
+                        if (e.target.classList.contains('popup__close') && e.target.closest('.popup')) {
+                            this.innerHTML = '';
+                            this.textContent = text;
+                            this.classList.remove('result__content-example--popup');
+                        }
+                    });
                 }
             }
-
-
-        })
-
+        });
     </script>
 {% endblock %}
