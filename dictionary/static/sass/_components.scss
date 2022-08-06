@@ -396,17 +396,23 @@
   font-weight: 500;
   text-align: center;
   margin-bottom: 1rem;
-  &--en {
-    direction: ltr;
-    text-align: left;
-  }
-  &--fa {
-    font-size: 2rem;
-  }
   @include respond(tab-land) {
     text-align: left;
     margin-right: 2rem;
     margin-left: 2rem;
+  }
+  &--en {
+    @include respond(tab-land) {
+      direction: ltr;
+      text-align: left;
+    }
+  }
+  &--fa {
+    font-size: 2rem;
+    @include respond(tab-land) {
+      direction: rtl;
+      text-align: right;
+    }
   }
 }
 
@@ -547,7 +553,8 @@
   gap: 2rem;
 
   &--en {
-    input, textarea {
+    input,
+    textarea {
       direction: ltr;
       text-align: left;
     }
@@ -611,7 +618,7 @@
     }
 
     .comment__actions {
-      @include respond(desktop){
+      @include respond(desktop) {
         margin-left: 0;
         margin-right: 5rem;
       }
@@ -650,13 +657,10 @@
         text-align: left;
         margin-right: 0;
         margin-left: 7rem;
-
       }
       margin-right: 7rem;
-
     }
   }
-
 
   &__profile {
     display: flex;
@@ -737,7 +741,7 @@
     visibility: hidden;
     transition: all 0.3s ease;
 
-    .comment__reply-close{
+    .comment__reply-close {
       margin-left: 2rem;
     }
 
@@ -751,10 +755,7 @@
         h2 {
           color: $text-color;
         }
-
       }
-
-
     }
   }
 
@@ -884,7 +885,8 @@
   gap: 1rem;
 
   &--en {
-    input, textarea {
+    input,
+    textarea {
       direction: ltr;
       text-align: left;
     }
@@ -979,14 +981,15 @@
   text-align: center;
 
   &--en {
-    input, select, option {
+    input,
+    select,
+    option {
       direction: ltr;
       text-align: left;
     }
-    .errorlist{
+    .errorlist {
       direction: ltr;
     }
-
   }
 
   @include respond(tab-land) {
@@ -1068,7 +1071,6 @@
     margin-top: 1rem;
     font-weight: 400;
   }
-
 }
 
 // END MESSAGE STYLE
@@ -1090,7 +1092,6 @@
   @include respond(tab) {
     width: 30rem;
   }
-
 
   &__content {
   }
