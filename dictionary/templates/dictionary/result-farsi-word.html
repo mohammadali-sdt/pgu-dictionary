@@ -29,7 +29,7 @@
 {% endblock %}
 {% block main %}
     <main class="result-fa-word">
-        <h1 class="word-result word-result--fa {% get_current_language as LANGUAGE_CODE %}{% if LANGUAGE_CODE == 'en' %}word-result--en{% endif %}">
+        <h1 class="word-result {% get_current_language as LANGUAGE_CODE %}{% if LANGUAGE_CODE == 'en' %}word-result--en{% else %}word-result--fa{% endif %}">
             {% trans "نتیجه جستجو برای واژه" %} "{{ word }}"
         </h1>
         <hr/>
